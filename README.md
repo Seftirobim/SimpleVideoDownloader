@@ -40,8 +40,9 @@ $ python main.py
 - choose an option
   
 ## SCREENSHOOTS
-![image](https://github.com/Seftirobim/SimpleVideoDownloader/assets/16395774/3fcb7f90-40e5-46dc-98ce-c19b527da2d7)
-![image](https://github.com/Seftirobim/SimpleVideoDownloader/assets/16395774/f3d85bfc-ca42-4972-9891-a21443c389a9)
+![image](https://github.com/Seftirobim/SimpleVideoDownloader/assets/16395774/9e4aa1b6-c6a4-471d-a865-9742cfc90b17)
+![image](https://github.com/Seftirobim/SimpleVideoDownloader/assets/16395774/ac190447-3cc0-4f11-9d9d-53dc2173132d)
+
 
 ## IMPORTANT
 is highly recommended that you install FFmpeg and FFprobe. FFprobe comes when you install the  FFmpeg package.
