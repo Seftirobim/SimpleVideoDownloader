@@ -1,2 +1,4 @@
+plyer==2.1.0
 rich==13.4.2
+win10toast==0.9
 yt_dlp==2023.6.22

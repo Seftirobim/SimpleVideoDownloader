@@ -5,13 +5,19 @@ from rich.markdown import Markdown
 import webbrowser
 from rich.table import Table,box
 from rich.align import Align
+from win10toast import ToastNotifier
+from plyer import notification
+import subprocess
+import platform
 
 console = Console()
+current_os = platform.system()
 menu_options = {
    1: 'Open links.txt',
-   2: 'Download Video(s)',
-   3: 'Download Video(s) and Convert to Mp3',
-   4: 'Exit'
+   2: 'Open Folder',
+   3: 'Download Video(s)',
+   4: 'Download Video(s) and Convert to Mp3',
+   5: 'Exit'
 }
 
 title_markdown = """
@@ -99,6 +105,11 @@ def download_videos(links, save_folder,convert=False):
             with yt_dlp.YoutubeDL(ydl_opts) as ydl:
                 ydl.add_post_processor(MyCustomPP(), when='pre_process')
                 ydl.download([link])
+                # Notification script tested on windows 10
+                if current_os == 'Windows' or current_os == 'Linux': # Show Windows or linux notification
+                    notification.notify(title="Process Finished !", message=f"{menu_options[prompt]} process has completed.", timeout=10)
+                elif current_os == 'Darwin': # Show mac notification
+                    subprocess.run(['osascript', '-e', f'display notification "{menu_options[prompt]} process has completed." with title "Process Finished !"'])
 
         except Exception as e:
             error_message = e
@@ -155,11 +166,11 @@ def run(C=False):
 
 if __name__ == "__main__":
     while True:
-
+        prompt = int;
         try:
             print_title()
             print_menu()
-            prompt = int(input("Select an option between [1-4] : "))
+            prompt = int(input("Select an option between [1-5] : "))
         except:
             print("Invalid Input !")
         if prompt == 1 :
@@ -167,12 +178,16 @@ if __name__ == "__main__":
 
             open_file =  os.startfile(file) 
         elif prompt == 2:
+            folder = os.getcwd()
+            webbrowser.open(os.path.abspath(folder))            
+            
+        elif prompt == 3:
             run(False)            
             break
-        elif prompt == 3:
+        elif prompt == 4:
             run(True)            
             break
-        elif prompt == 4:
+        elif prompt == 5:
             console.print("Exit !",style="red1")
             break
         else:
