@@ -42,6 +42,8 @@ $ python main.py
 ## SCREENSHOOTS
 ![image](https://github.com/Seftirobim/SimpleVideoDownloader/assets/16395774/9e4aa1b6-c6a4-471d-a865-9742cfc90b17)
 ![image](https://github.com/Seftirobim/SimpleVideoDownloader/assets/16395774/ac190447-3cc0-4f11-9d9d-53dc2173132d)
+![image](https://github.com/Seftirobim/SimpleVideoDownloader/assets/16395774/70e57382-821c-4cfd-94c1-1d33df3bcefe)
+
 
 
 ## IMPORTANT
