@@ -105,11 +105,7 @@ def download_videos(links, save_folder,convert=False):
             with yt_dlp.YoutubeDL(ydl_opts) as ydl:
                 ydl.add_post_processor(MyCustomPP(), when='pre_process')
                 ydl.download([link])
-                # Notification script tested on windows 10
-                if current_os == 'Windows' or current_os == 'Linux': # Show Windows or linux notification
-                    notification.notify(title="Process Finished !", message=f"{menu_options[prompt]} process has completed.", timeout=10)
-                elif current_os == 'Darwin': # Show mac notification
-                    subprocess.run(['osascript', '-e', f'display notification "{menu_options[prompt]} process has completed." with title "Process Finished !"'])
+                
 
         except Exception as e:
             error_message = e
@@ -146,8 +142,18 @@ def run(C=False):
             print(link)
     else:
         if C == False :
+            # Notification script tested on windows 10
+            if current_os == 'Windows' or current_os == 'Linux': # Show Windows or linux notification
+                notification.notify(title="Process Finished !", message=f"{menu_options[prompt]} process has completed.", timeout=10)
+            elif current_os == 'Darwin': # Show mac notification
+                subprocess.run(['osascript', '-e', f'display notification "{menu_options[prompt]} process has completed." with title "Process Finished !"'])
             console.print("\nAll video(s) have been successfully downloaded.!",style="bold spring_green1")
-        else:    
+        else:
+            # Notification script tested on windows 10
+            if current_os == 'Windows' or current_os == 'Linux': # Show Windows or linux notification
+                notification.notify(title="Process Finished !", message=f"{menu_options[prompt]} process has completed.", timeout=10)
+            elif current_os == 'Darwin': # Show mac notification
+                subprocess.run(['osascript', '-e', f'display notification "{menu_options[prompt]} process has completed." with title "Process Finished !"'])    
             console.print("\nAll video(s) have been successfully downloaded and converted!",style="bold spring_green1")
         
         while True:
