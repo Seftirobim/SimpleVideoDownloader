@@ -58,6 +58,14 @@ class MyCustomPP(yt_dlp.postprocessor.PostProcessor):
         self.to_screen('Doing stuff')
         return [], info
 
+def clear_screen():
+    # Untuk Windows
+    if os.name == 'nt':
+        _ = os.system('cls')
+    # Untuk Unix/Linux/MacOS
+    else:
+        _ = os.system('clear')
+
 def print_title():
     console.print(SRM_logo, justify="center",style="bright_cyan")
     console.print('https://github.com/Seftirobim/SimpleYTDownloader', justify="center", style="bold grey100")
@@ -88,6 +96,7 @@ def download_videos(links, save_folder,convert=False):
                     'progress_hooks': [my_hook],
                     'quiet': True,
                     'ignoreerrors': True,
+                    'no_warnings' : True
                 }
             else:
                 ydl_opts = {
@@ -100,7 +109,8 @@ def download_videos(links, save_folder,convert=False):
                     'outtmpl': os.path.join(save_folder, '%(title)s.%(ext)s'),
                     'progress_hooks': [my_hook],
                     'quiet': True,
-                    'ignoreerrors': True
+                    'ignoreerrors': True,
+                    'no_warnings' : True
                 }  
             with yt_dlp.YoutubeDL(ydl_opts) as ydl:
                 ydl.add_post_processor(MyCustomPP(), when='pre_process')
@@ -156,24 +166,15 @@ def run(C=False):
                 subprocess.run(['osascript', '-e', f'display notification "{menu_options[prompt]} process has completed." with title "Process Finished !"'])    
             console.print("\nAll video(s) have been successfully downloaded and converted!",style="bold spring_green1")
         
-        while True:
-            try:
-                open_folder = input("Would you like to open the folder? (y/n): ")
-            except:
-                console.print(f"Invalid Input ! Enter (y/n)",style="red1")
-            if open_folder.lower() == "y":
-                webbrowser.open(os.path.abspath(save_path))
-                break
-            elif open_folder.lower() == "n":
-                console.print(f"Exit !",style="yellow")
-                break
-            else:
-                console.print(f"Invalid Input ! Enter (y/n)",style="red1")
+        
+
 
 if __name__ == "__main__":
+    
     while True:
         prompt = int;
         try:
+            clear_screen()
             print_title()
             print_menu()
             prompt = int(input("Select an option between [1-5] : "))
@@ -189,10 +190,29 @@ if __name__ == "__main__":
             
         elif prompt == 3:
             run(False)            
-            break
+            current_path = os.getcwd()
+            save_path = ''.join([current_path,"/downloads/video"]) 
+            
+            try:
+                open_folder = input("Would you like to open the folder? (y/n): ")
+            except:
+                console.print(f"Invalid Input ! Enter (y/n)",style="red1")
+            if open_folder.lower() == "y":
+                webbrowser.open(os.path.abspath(save_path))
+
         elif prompt == 4:
-            run(True)            
-            break
+            run(True) 
+            current_path = os.getcwd()
+            save_path = ''.join([current_path,"/downloads/mp3"]) 
+            
+            try:
+                open_folder = input("Would you like to open the folder? (y/n): ")
+            except:
+                console.print(f"Invalid Input ! Enter (y/n)",style="red1")
+            if open_folder.lower() == "y":
+                webbrowser.open(os.path.abspath(save_path))
+                       
+            
         elif prompt == 5:
             console.print("Exit !",style="red1")
             break
